@@ -24,6 +24,11 @@ def notify(message):
 prevstart = None
 
 def check():
+    # Check if it's 12pm - if yes, let me know you're still running
+    now = datetime.datetime.now()
+    if now.hour == 12 and now.minute == 00:
+        print('still running')
+        notify(f'Still Running xx')
     global prevstart
 
     # Check if any appointments are available, and if so, notify
@@ -48,7 +53,7 @@ def check():
             date = parser.parse(start)
             if date.year == 2024:
                 notify(f'Found appointment on {start}')
-    print(f'Found 0 appts ',  datetime.datetime.now() )
+    print(f'Found 0 appts ',  datetime.datetime.now())
     return False
 
 while True:
@@ -58,4 +63,3 @@ while True:
     else:
         # Wait 1 min otherwise
         time.sleep(60)
-
